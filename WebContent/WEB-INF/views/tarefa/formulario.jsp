@@ -9,6 +9,7 @@
 <link href = "../css/style.css" rel = "stylesheet" type = "text/css" />
 </head>
 <body>
+	<a href="listaTarefas">Ver tarefas</a>
 	<h3>Adicionar Tarefas</h3>
 	<form:errors path="tarefa.descricao"/>
 	<form action="adicionaTarefa" method="post">

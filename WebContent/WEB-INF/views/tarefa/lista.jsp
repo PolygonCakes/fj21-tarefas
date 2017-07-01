@@ -18,6 +18,8 @@
 			<th>Descrição</th>
 			<th>Finalizado?</th>
 			<th>Data da Finalização</th>
+			<th>Remover</th>
+			<th>Atualizar</th>
 		</tr>
 		<c:forEach items="${tarefas}" var="tarefa">
 			<tr>
@@ -32,6 +34,8 @@
 				<td>
 					<fmt:formatDate value="${tarefa.dataFinalizacao.time }" pattern="dd/MM/yyyy"/>
 				</td>
+				<td><a href="removeTarefa?id=${tarefa.id}">Remover</a></td>
+				<td><a href="mostraTarefa?id=${tarefa.id}">Alterar</a></td>
 			</tr>
 		</c:forEach>
 	</table>
