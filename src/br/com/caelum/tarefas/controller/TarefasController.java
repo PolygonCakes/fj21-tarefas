@@ -1,11 +1,15 @@
 package br.com.caelum.tarefas.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.caelum.tarefas.dao.JdbcTarefaDao;
 import br.com.caelum.tarefas.modelo.Tarefa;
@@ -36,11 +40,11 @@ public class TarefasController {
 		return "tarefa/lista";
 	}
 	
+	@ResponseBody
 	@RequestMapping("removeTarefa")
-	public String remove(Tarefa tarefa) {
+	public void remove(Tarefa tarefa) {
 		JdbcTarefaDao dao = new JdbcTarefaDao();
 		dao.remove(tarefa);
-		return "redirect:listaTarefas";
 	}
 	
 	@RequestMapping("mostraTarefa")
@@ -55,5 +59,15 @@ public class TarefasController {
 		JdbcTarefaDao dao = new JdbcTarefaDao();
 		dao.altera(tarefa);
 		return "redirect:listaTarefas";
+	}
+	
+	@ResponseBody
+	@RequestMapping("finalizaTarefa")
+	public String finaliza(Long id) {
+		JdbcTarefaDao dao = new JdbcTarefaDao();
+		dao.finaliza(id);
+		Date t = dao.buscaPorId(id).getDataFinalizacao().getTime();
+		String formatada = new SimpleDateFormat("dd/MM/yyyy").format(t);
+		return formatada;
 	}
 }
